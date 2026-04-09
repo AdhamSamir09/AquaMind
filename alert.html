@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aquamind System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+      body { font-family: "Poppins", sans-serif; background-color: #f3f4f6; margin: 0; padding: 0; color: #333; }
+      .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+      
+      .header-wrapper { background-color: #fff; width: 100%; padding: 15px 40px; box-sizing: border-box; margin-bottom: 30px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); display: flex; justify-content: space-between; align-items: center; }
+      .brand-section { display: flex; align-items: center; gap: 15px; }
+      .brand-section h1 { color: #2563eb; margin: 0; font-size: 28px; line-height: 1; }
+      .header-logo { height: 60px; width: auto; display: block; }
+      
+      .nav-bar { display: flex; gap: 30px; align-items: center; }
+      .nav-item { text-decoration: none; color: #666; font-weight: 600; font-size: 14px; transition: color 0.3s ease; }
+      .nav-item:hover, .nav-item.active { color: #2563eb; }
+      
+      /* Dropdown Styles adapted for light header */
+      .dropdown { position: relative; display: flex; align-items: center; }
+      .dropbtn { 
+          text-decoration: none; 
+          color: #666; 
+          font-weight: 600; 
+          font-size: 14px; 
+          transition: color 0.3s ease; 
+          background: none; 
+          border: none; 
+          font-family: inherit; 
+          cursor: pointer; 
+          display: flex; 
+          align-items: center; 
+          gap: 6px; 
+          padding: 0;
+      }
+      .dropbtn:hover, .dropdown:hover .dropbtn { color: #2563eb; }
+      .dropdown-content { 
+          display: none; 
+          position: absolute; 
+          background-color: white; 
+          min-width: 160px; 
+          box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+          z-index: 10; 
+          border-radius: 8px; 
+          overflow: hidden;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-top: 10px;
+          border: 1px solid #eee;
+      }
+      .dropdown-content a { 
+          color: #666; 
+          padding: 12px 16px; 
+          text-decoration: none; 
+          display: block; 
+          text-align: left; 
+          font-size: 14px;
+          font-weight: 500;
+          transition: 0.2s;
+      }
+      .dropdown-content a:hover { background-color: #f3f4f6; color: #2563eb; }
+      .dropdown:hover .dropdown-content { display: block; }
+
+      .box { background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); margin-bottom: 20px; }
+      .box-title { font-size: 18px; font-weight: bold; color: #1f2937; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+      .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+      .status-card { background-color: #f9f9f9; padding: 15px; border-radius: 8px; border-left: 4px solid #2563eb; }
+      .status-card h4 { margin: 0; font-size: 12px; color: #777; text-transform: uppercase; letter-spacing: 0.5px; }
+      .status-card span { font-size: 16px; font-weight: bold; color: #333; display: block; margin-top: 5px; }
+      .alert-box { padding: 15px; border-radius: 6px; margin-bottom: 10px; border: 1px solid #eee; }
+      .alert-high { background-color: #fef2f2; border-left: 5px solid #ef4444; }
+      .alert-medium { background-color: #fffbeb; border-left: 5px solid #f59e0b; }
+      .text-red { color: #ef4444; font-weight: bold; } .text-orange { color: #f59e0b; font-weight: bold; } .text-green { color: #10b981; font-weight: bold; } .text-blue { color: #2563eb; font-weight: bold; }
+      .log-item { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; gap: 15px; font-size: 14px; }
+      .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+      .button-group { display: flex; gap: 10px; margin-top: 20px; }
+      .btn { flex: 1; padding: 12px; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; font-size: 14px; transition: opacity 0.2s; }
+      .btn:hover { opacity: 0.9; }
+      .btn-blue { background: linear-gradient(90deg, #2563eb, #7c3aed); } .btn-gray { background-color: #e5e7eb; color: #333; } .btn-green { background-color: #10b981; }
+      
+      @media (max-width: 600px) { 
+          .grid-4 { grid-template-columns: 1fr; } 
+          .button-group { flex-direction: column; } 
+          .header-wrapper { flex-direction: column; gap: 20px; text-align: center; } 
+          .brand-section { justify-content: center; } 
+          .nav-bar { flex-wrap: wrap; justify-content: center; } 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="brand-section">
+        <img src="Solid_blue.png" alt="" class="header-logo" onerror="this.style.display='none'"/>
+        <h1>Aquamind</h1>
+      </div>
+      <div class="nav-bar">
+        <a href="index.html" class="nav-item">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">System <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-content">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="control.html">Control</a>
+                <a href="alert.html">Alerts</a>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="box">
+        <div class="box-title"><i class="fas fa-bolt text-green"></i> System Status</div>
+        <div class="grid-4">
+          <div class="status-card"><h4>Power Status</h4><span class="text-green">Connected</span></div>
+          <div class="status-card"><h4>ESP32 Status</h4><span class="text-green">Running</span></div>
+          <div class="status-card"><h4>Operation Mode</h4><span class="text-blue">Online</span></div>
+          <div class="status-card"><h4>Wi-Fi Signal</h4><span class="text-green">Strong</span></div>
+        </div>
+        <p style="text-align: right; color: #888; font-size: 13px; margin-top: 15px;"><i class="far fa-clock"></i> Uptime: 12h 35m</p>
+      </div>
+      
+      <div class="box">
+        <div class="box-title"><i class="fas fa-bell text-orange"></i> Alerts</div>
+        <div class="alert-box alert-high">
+          <div style="font-weight: bold; margin-bottom: 5px; color: #b91c1c"><i class="fas fa-exclamation-triangle"></i> Low Soil Moisture</div>
+          <div style="font-size: 13px; color: #555">10:45 AM | Priority: <span class="text-red">High</span> | Action: Check irrigation line</div>
+        </div>
+        <div class="alert-box alert-medium">
+          <div style="font-weight: bold; margin-bottom: 5px; color: #92400e"><i class="fas fa-battery-quarter"></i> Battery Level Low</div>
+          <div style="font-size: 13px; color: #555">09:20 AM | Priority: <span class="text-orange">Medium</span></div>
+        </div>
+      </div>
+      
+      <div class="box">
+        <div class="box-title"><i class="fas fa-list text-blue"></i> Error Logs</div>
+        <div class="log-item"><span style="font-weight: bold; color: #7c3aed">10:30 AM</span><span><strong>Sensor Error:</strong> Moisture sensor not responding</span></div>
+        <div class="log-item"><span style="font-weight: bold; color: #7c3aed">08:10 AM</span><span><strong>Network Error:</strong> Cloud connection lost</span></div>
+      </div>
+      
+      <div class="box">
+        <div class="box-title"><i class="fas fa-wifi text-blue"></i> Connection Monitor</div>
+        <div class="row"><span>Cloud Status:</span><span class="text-green"><i class="fas fa-check-circle"></i> Connected</span></div>
+        <div class="row"><span>Last Sync:</span><span><strong>3</strong> minutes ago</span></div>
+        <div class="row"><span>Disconnections Today:</span><span class="text-red">1</span></div>
+        <div style="background: #f8f9fa; padding: 10px; margin-top: 15px; border-radius: 5px;">
+          <div class="row"><span>Safe Mode:</span><span style="font-weight: bold; color: #555">OFF</span></div>
+          <div class="row" style="border-bottom: none"><span>Auto Protection:</span><span class="text-green">Enabled</span></div>
+        </div>
+      </div>
+      
+      <div class="button-group">
+        <button class="btn btn-blue">Retry Cloud Connection</button>
+        <button class="btn btn-gray">Clear Alerts</button>
+        <button class="btn btn-green">Download Logs</button>
+      </div>
+    </div>
+  </body>
+</html>

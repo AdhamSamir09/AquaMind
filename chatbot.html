@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaMind Chatbot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        /* --- Dashboard Nav Styles --- */
+        .header-wrapper { 
+            background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); 
+            width: 100%; 
+            padding: 15px 40px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .header-wrapper h1 { 
+            color: #ffffff; 
+            margin: 0; 
+            font-size: 24px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 600;
+        }
+        .header-logo { height: 40px; width: auto; }
+        .nav-bar { display: flex; gap: 20px; align-items: center; }
+        .nav-item { 
+            text-decoration: none; 
+            color: rgba(255, 255, 255, 0.9); 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            padding: 8px 16px; 
+            border-radius: 50px; 
+            transition: all 0.3s ease; 
+        }
+        .nav-item:hover, .nav-item.active { 
+            background-color: rgba(255, 255, 255, 0.2); 
+            color: white; 
+        }
+        
+        @media (max-width: 768px) { 
+            .header-wrapper { flex-direction: column; gap: 15px; padding: 20px; } 
+            .nav-bar { flex-wrap: wrap; justify-content: center; }
+        }
+        /* ---------------------------- */
+
+        /* --- Chatbot Styles --- */
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        .chat-container h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #chatbox {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 350px;
+            max-height: 450px;
+            padding: 20px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 75%;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+        .bot {
+            background: #e0e7ff;
+            color: #1e3a8a;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px; /* Makes it look like a chat bubble tail */
+        }
+        .user {
+            background: #2563eb;
+            color: white;
+            align-self: flex-end;
+            text-align: right;
+            border-bottom-right-radius: 4px; /* Makes it look like a chat bubble tail */
+        }
+        .input-area {
+            display: flex;
+            gap: 15px;
+        }
+        input[type=text] {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-family: "Poppins", sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type=text]:focus {
+            border-color: #2563eb;
+        }
+        button {
+            padding: 12px 25px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-family: "Poppins", sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-wrapper">
+        <h1 onclick="window.location.href='index.html'"><img src="white_icon.png" alt="" class="header-logo" onerror="this.style.display='none'"/> AquaMind</h1>
+        <nav class="nav-bar">
+            <a href="#" class="nav-item">About Us</a> 
+            <a href="equipment.html" class="nav-item">Equipment</a>
+            <a href="feedback.html" class="nav-item">Feedbacks</a>
+            <a href="contact.html" class="nav-item">Contact us</a> 
+            <a href="logIn.html" class="nav-item">Log In</a> 
+            <a href="signUp.html" class="nav-item">Sign up</a>
+        </nav>
+    </header>
+
+    <div class="chat-container">
+        <h2><i class="fas fa-robot"></i> AquaMind Support</h2>
+        <div id="chatbox">
+            <div class="message bot">Hello! I am the AquaMind assistant. How can I help you today?</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="question" placeholder="Ask about AquaMind..." onkeypress="handleKeyPress(event)">
+            <button onclick="ask()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function addMessage(text, sender) {
+            const box = document.getElementById("chatbox");
+            box.innerHTML += `<div class="message ${sender}">${text}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                ask();
+            }
+        }
+
+        function ask() {
+            let q = document.getElementById("question").value.trim();
+            if(!q) return;
+            
+            let lower = q.toLowerCase();
+            let lang = /[ء-ي]/.test(q) ? "ar" : "en";
+            
+            addMessage(q, "user");
+            document.getElementById("question").value = '';
+            
+            let reply = "";
+            if(lower.includes("leak") || lower.includes("تسرب")) {
+                reply = lang === "ar" ? "نعم، النظام يستطيع اكتشاف التسربات وإرسال تنبيهات فورية." : "Yes, the system can detect water leaks and send instant alerts.";
+            } else if(lower.includes("install") || lower.includes("تركيب")) {
+                reply = lang === "ar" ? "عملية التركيب سهلة وتتم باستخدام دليل بسيط للمستخدم." : "Installation is simple and can be done using a user guide.";
+            } else if(lower.includes("data") || lower.includes("بيانات")) {
+                reply = lang === "ar" ? "يتم تخزين بيانات الاستهلاك لعرض تقارير مفصلة للمستخدم." : "Usage data is stored to provide detailed reports for users.";
+            } else if(lower.includes("security") || lower.includes("آمن")) {
+                reply = lang === "ar" ? "النظام آمن ويتم حماية البيانات باستخدام تقنيات اتصال مشفرة." : "The system is secure and all data is protected using encrypted communication.";
+            } else if(lower.includes("team") || lower.includes("فريق")) {
+                reply = lang === "ar" ? "يتكون فريق Aqua Mind من مطورين ومهندسين متخصصين في البرمجة والإلكترونيات." : "The Aqua Mind team consists of developers and engineers specialized in programming and electronics.";
+            } else if(lower.includes("cost") || lower.includes("سعر")) {
+                reply = lang === "ar" ? "تكلفة النظام تختلف حسب حجم المكان وعدد الأجهزة المطلوبة." : "The cost of the system depends on the location size and number of devices needed.";
+            } else {
+                reply = lang === "ar" ? "عذراً، لم أفهم سؤالك." : "Sorry, I didn't understand your question.";
+            }
+            
+            setTimeout(() => addMessage(reply, "bot"), 600);
+        }
+    </script>
+</body>
+</html>

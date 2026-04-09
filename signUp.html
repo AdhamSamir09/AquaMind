@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aquamind - Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f3f4f6;
+        color: #333;
+      }
+      
+      /* --- Dashboard Nav Styles --- */
+      .header-wrapper { 
+        background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); 
+        width: 100%; 
+        padding: 15px 40px; 
+        margin-bottom: 30px; 
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+      }
+      .header-wrapper h1 { 
+        color: #ffffff; 
+        margin: 0; 
+        font-size: 24px; 
+        display: flex; 
+        align-items: center; 
+        gap: 12px; 
+      }
+      .header-logo { height: 40px; width: auto; }
+      .nav-bar { display: flex; gap: 20px; align-items: center; }
+      .nav-item { 
+        text-decoration: none; 
+        color: rgba(255, 255, 255, 0.9); 
+        font-weight: 500; 
+        font-size: 0.95rem; 
+        padding: 8px 16px; 
+        border-radius: 50px; 
+        transition: all 0.3s ease; 
+        background: none; 
+        border: none; 
+        font-family: inherit; 
+        cursor: pointer; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px; 
+      }
+      .nav-item:hover, .nav-item.active { 
+        background-color: rgba(255, 255, 255, 0.2); 
+        color: white; 
+      }
+      
+      @media (max-width: 768px) { 
+        .header-wrapper { flex-direction: column; gap: 15px; padding: 20px; } 
+        .nav-bar { flex-wrap: wrap; justify-content: center; }
+      }
+
+      .signup-wrapper {
+        background: white;
+        max-width: 450px;
+        margin: 40px auto 80px auto;
+        padding: 45px;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      .signup-wrapper h1 {
+        color: #2563eb;
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+      .subtitle {
+        margin-bottom: 25px;
+      }
+      .input-group {
+        text-align: left;
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .signup-btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        font-family: "Poppins", sans-serif;
+      }
+      footer {
+        margin-top: 15px;
+      }
+      footer a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <header class="header-wrapper">
+      <h1 onclick="window.location.href='index.html'"><img src="white_icon.png" alt="" class="header-logo" onerror="this.style.display='none'"/> AquaMind</h1>
+      <nav class="nav-bar">
+        <a href="#" class="nav-item">About Us</a> 
+        <a href="equipment.html" class="nav-item">Equipment</a>
+        <a href="feedback.html" class="nav-item">Feedbacks</a>
+        <a href="contact.html" class="nav-item">Contact us</a> 
+        <a href="logIn.html" class="nav-item">Log In</a> 
+        <a href="signUp.html" class="nav-item active">Sign up</a>
+      </nav>
+    </header>
+
+    <div class="signup-wrapper">
+      <h1>Join Aquamind Today</h1>
+      <p class="subtitle">Track and optimize your water usage.</p>
+      <form action="dashboard.html" method="get">
+        <div class="input-group">
+          <label>Full Name:</label>
+          <input type="text" placeholder="Enter your name" />
+        </div>
+        <div class="input-group">
+          <label>Email:</label>
+          <input type="email" placeholder="example@mail.com" />
+        </div>
+        <div class="input-group">
+          <label>Phone:</label>
+          <input type="tel" placeholder="+20 123 456 7890" />
+        </div>
+        <div class="input-group">
+          <label>Password:</label>
+          <input type="password" />
+        </div>
+        <div class="input-group">
+          <label>Target market:</label>
+          <select>
+            <option>Educational and industrial institutions</option>
+            <option>Houses and building</option>
+            <option>Agricultural areas</option>
+          </select>
+        </div>
+        <button class="signup-btn">Create Account</button>
+      </form>
+      <footer>
+        Already have an account?
+        <a href="logIn.html">Login here</a>
+      </footer>
+    </div>
+  </body>
+</html>

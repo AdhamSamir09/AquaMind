@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaMind - Smart Water Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        /* --- Dashboard Nav Styles --- */
+        .header-wrapper { 
+            background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); 
+            width: 100%; 
+            padding: 15px 40px; 
+            margin-bottom: 40px; 
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .header-wrapper h1 { 
+            color: #ffffff; 
+            margin: 0; 
+            font-size: 24px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 600;
+        }
+        .header-logo { height: 40px; width: auto; }
+        .nav-bar { display: flex; gap: 20px; align-items: center; }
+        .nav-item { 
+            text-decoration: none; 
+            color: rgba(255, 255, 255, 0.9); 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+            padding: 8px 16px; 
+            border-radius: 50px; 
+            transition: all 0.3s ease; 
+        }
+        .nav-item:hover, .nav-item.active { 
+            background-color: rgba(255, 255, 255, 0.2); 
+            color: white; 
+        }
+        
+        @media (max-width: 992px) {
+            .header-wrapper { flex-direction: column; gap: 15px; padding: 20px; } 
+            .nav-bar { flex-wrap: wrap; justify-content: center; }
+        }
+        /* ---------------------------- */
+
+        /* Main Container for 1200px Grid layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-text h1 {
+            font-weight: 700;
+            font-size: 2.8rem;
+            line-height: 1.2;
+        }
+        .text-dark-blue { color: #1e3a8a; }
+        .text-light-blue { color: #2563eb; }
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin: 20px 0;
+        }
+        .hero-quote {
+            font-style: italic;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .feature-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: #1e3a8a;
+        }
+        .feature-title i {
+            font-size: 24px;
+            color: #2563eb;
+        }
+        .feature-card p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Section Banners */
+        .section-banner {
+            background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Product Components Grid */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .component-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .component-card:hover {
+            transform: translateY(-5px);
+        }
+        .component-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;   
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
+        }
+        .component-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        .component-card h5 {
+            font-size: 1rem;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        /* How It Works Grid */
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        .work-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .work-card:hover {
+            transform: translateY(-5px);
+        }
+        .work-card img {
+            border-radius: 8px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .work-info h3 {
+            color: #1e3a8a;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .work-info p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Order Button */
+        .order-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;   
+            margin: 20px 0 60px 0;
+        }
+        .order-btn {
+            background: linear-gradient(90deg, #1e3a8a, #2563eb);
+            color: white;
+            border: none;
+            padding: 15px 60px;
+            font-size: 1.1rem;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        .order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+<body> 
+
+    <header class="header-wrapper">
+        <h1 onclick="window.location.href='index.html'">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px; color: white;">
+                <img src="white_icon.png" alt="" class="header-logo" onerror="this.style.display='none'"/> 
+                AquaMind
+            </a>
+        </h1>
+        <nav class="nav-bar">
+            <a href="#" class="nav-item">About Us</a> 
+            <a href="equipment.html" class="nav-item">Equipment</a>
+            <a href="feedback.html" class="nav-item">Feedbacks</a>
+            <a href="contact.html" class="nav-item">Contact us</a> 
+            <a href="logIn.html" class="nav-item">Log In</a> 
+            <a href="signUp.html" class="nav-item">Sign up</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="Aqua mind photo.jpeg" alt="product photo" onerror="this.src='https://via.placeholder.com/600x400?text=AquaMind+Product'">
+            </div>
+            <div class="hero-text">
+                <h1 class="text-dark-blue">Smart Water</h1>
+                <h1 class="text-light-blue">Management</h1>
+                <p>Optimize usage, detect leaks, and save resources effortlessly with our automated systems.</p>
+                <div class="hero-quote">"Technology that listens to your pipes"</div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-title">
+                    <i class="fa-solid fa-gears"></i>
+                    <h3>Automatic Control</h3>
+                </div>
+                <p>Automatically regulate water flow and pressure based on smart, real-time algorithms.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">
+                    <i class="fa-solid fa-bell"></i>
+                    <h3>Instant Alerts</h3>
+                </div>
+                <p>Receive real-time notifications about your daily water usage and potential leak issues.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">
+                    <i class="fa-solid fa-droplet"></i>
+                    <h3>Resource Saving</h3>
+                </div>
+                <p>Optimizes water usage and reduces unnecessary consumption to protect our natural resources.</p>
+            </div>
+        </div>
+
+        <div class="section-banner">Product Components</div>
+
+        <div class="components-grid">
+            <div class="component-card">
+                <img src="download.jpeg" alt="flow sensor" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Water Flow Sensor YF-S201</h5>
+            </div>
+            <div class="component-card">
+                <img src="solinoid valve.jpeg" alt="Solenoid valve" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Solenoid Valve</h5>
+            </div>
+            <div class="component-card">
+                <img src="lcd.jpeg" alt="Lcd screen with i2c" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>LCD Screen with I2C</h5>
+            </div>
+            <div class="component-card">
+                <img src="EP32.jpeg" alt="ESP32 with Touch Screen" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>ESP32 Board</h5>
+            </div>
+            <div class="component-card">
+                <img src="solar panels.jpeg" alt="Solar Panels" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Solar Panels</h5>
+            </div>
+            <div class="component-card">
+                <img src="soolar controller.jpeg" alt="Solar controller" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Solar Controller</h5>
+            </div>
+            <div class="component-card">
+                <img src="battery.jpeg" alt="battery" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Battery Pack</h5>
+            </div>
+            <div class="component-card">
+                <img src="buck.jpeg" alt="buck" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Buck Converter LM2596</h5>
+            </div>
+            <div class="component-card">
+                <img src="channel relay.jpeg" alt="channel relay" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Channel Relay</h5>
+            </div>
+            <div class="component-card">
+                <img src="ultrasonic.jpeg" alt="Ultrasonic" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Ultrasonic Sensor</h5>
+            </div>
+            <div class="component-card">
+                <img src="soil sensor.jpeg" alt="soil sensor" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Soil Sensor</h5>
+            </div>
+            <div class="component-card">
+                <img src="buzzer sensor.jpeg" alt="buzzer" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Buzzer Alarm</h5>
+            </div>
+            <div class="component-card">
+                <img src="fuse.jpeg" alt="fuse" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Fuse Protection</h5>
+            </div>
+            <div class="component-card">
+                <img src="diode.jpeg" alt="diode" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Diode</h5>
+            </div>
+            <div class="component-card">
+                <img src="Switch.jpeg" alt="switch" onerror="this.src='https://via.placeholder.com/150'">
+                <h5>Rocker Switch</h5>
+            </div>
+        </div>
+
+        <div class="section-banner">How It Works</div>
+
+        <div class="how-it-works-grid">
+            <div class="work-card">
+                <img src="download.jpeg" alt="flow sensor" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="work-info">
+                    <h3>Water Flow Sensor</h3>
+                    <p>Measures the water flow rate and ensures continuous, safe circulation.</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="solar panels.jpeg" alt="solar panel" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="work-info">
+                    <h3>Solar Panels</h3>
+                    <p>Converts sunlight directly into clean electricity to power the entire system.</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="controller.jpeg" alt="solar controller" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="work-info">
+                    <h3>Solar Controller</h3>
+                    <p>Regulates the charging flow and protects the internal battery from damage.</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="battery.jpeg" alt="battery" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="work-info">
+                    <h3>Battery</h3>
+                    <p>Stores generated energy for uninterrupted night-time or low-light operation.</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="buck.jpeg" alt="buck" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="work-info">
+                    <h3>Buck Converter</h3>
+                    <p>Efficiently steps down voltage for safe usage by low-voltage components.</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="EP32.jpeg" alt="ESP32" onerror="this.src='https://via.placeholder.com/100'">
+                <div class="work-info">
+                    <h3>ESP32 Board</h3>
+                    <p>The main brain controlling all logic, processing, and wireless communication.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-container">
+            <button class="order-btn" onclick="window.location.href='checkout.html'">Order Now</button>
+        </div>
+
+    </div>
+</body>
+</html>

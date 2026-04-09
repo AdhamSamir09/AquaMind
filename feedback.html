@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AquaMind | Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <style>
+      :root { --bg-gray: #f3f4f6; --blue: #2563eb; --blue-dark: #1e40af; --purple: #7c3aed; --white: #ffffff; --text-main: #0f172a; --text-muted: #64748b; }
+      nav { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); padding: 15px 25px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); margin-bottom: 30px; }
+      .nav-links { display: flex; gap: 15px; }
+      nav a.menu-item { text-decoration: none; color: rgba(255, 255, 255, 0.9); font-weight: 500; padding: 8px 16px; border-radius: 50px; transition: all 0.3s ease; font-size: 0.95rem; }
+      nav a.menu-item:hover, nav a.menu-item.active { background-color: rgba(255, 255, 255, 0.2); color: white; }
+      .logo-image { height: 70px; }
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+      body { background: var(--bg-gray); color: var(--text-main); }
+      .feedback { text-align: center; padding: 80px 60px; }
+      .feedback h2 { font-size: 40px; color: var(--blue); margin-bottom: 10px; }
+      .subtitle { color: var(--text-muted); margin-bottom: 60px; }
+      .cards { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+      .card { background: white; width: 330px; padding: 35px; border-radius: 25px; border-top: 5px solid #e5e7eb; transition: 0.3s; }
+      .card:hover { transform: translateY(-10px); border-top-color: var(--blue); }
+      .card img { width: 60px; border-radius: 50%; }
+      .card h3 { color: var(--blue); }
+      .card span { color: var(--text-muted); font-size: 14px; }
+      .stars { color: gold; margin: 8px 0; }
+      .form-section { padding: 90px 20px; background: linear-gradient(135deg, #2563eb, #3b82f6); text-align: center; }
+      .form-section h2 { color: white; margin-bottom: 20px; }
+      form { max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 15px; }
+      input, textarea, select { padding: 14px; border-radius: 12px; border: none; }
+      button { padding: 14px; border-radius: 25px; border: none; background: var(--blue-dark); color: white; cursor: pointer; }
+      button:hover { background: white; color: var(--blue); }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div style="display: flex; align-items: center; gap: 12px">
+        <img src="logo.png" class="logo-image" onerror="this.style.display='none'"/>
+        <span style="color: white; font-size: 24px; font-weight: 600">AquaMind</span>
+      </div>
+      <div class="nav-links">
+        <a href="feedback.html" class="menu-item " active>Feedbacks</a>
+        <a href="dashboard.html" class="menu-item">Dashboard</a>
+        <a href="index.html" class="menu-item">Home</a>
+      </div>
+    </nav>
+    <section class="feedback">
+      <h2>What people say</h2>
+      <p class="subtitle">Discover what our satisfied customers say</p>
+      <div class="cards">
+        <div class="card"><img src="https://i.pravatar.cc/100?img=12" /><h3>Ahmed</h3><span>Owner</span><div class="stars">⭐⭐⭐⭐⭐</div><p>Great experience.</p></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=32" /><h3>Sarah</h3><span>Manager</span><div class="stars">⭐⭐⭐⭐</div><p>Very intuitive.</p></div>
+        <div class="card"><img src="https://i.pravatar.cc/100?img=47" /><h3>Malak</h3><span>Operations</span><div class="stars">⭐⭐⭐</div><p>It is very good.</p></div>
+      </div>
+    </section>
+    <section class="form-section">
+      <h2>Send feedback</h2>
+      <form>
+        <input placeholder="Your Name" />
+        <textarea placeholder="Feedback"></textarea>
+        <select>
+          <option>Rate</option><option>Excellent ⭐⭐⭐⭐⭐</option><option>Good ⭐⭐⭐⭐</option><option>Average ⭐⭐⭐</option>
+        </select>
+        <button>Send</button>
+      </form>
+    </section>
+  </body>
+</html>`;

@@ -1,0 +1,114 @@
+`<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AquaMind</title>
+    <link rel="stylesheet" href="HOME.css" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+      body { background: linear-gradient(135deg, #061a2b, #0b2e4e, #061a2b); color: #eaf6ff; overflow-x: hidden; }
+      header { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1200px; display: flex; align-items: center; justify-content: space-between; padding: 15px 30px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border-radius: 30px; z-index: 100; }
+      .logo { display: flex; align-items: center; gap: 10px; font-size: 26px; font-weight: bold; color: #00d4ff; }
+      nav ul { list-style: none; display: flex; gap: 35px; }
+      nav a { text-decoration: none; color: #eaf6ff; transition: 0.3s; }
+      nav a:hover { color: #4cf2e9; }
+      .support-btn { background: linear-gradient(45deg, #00d4ff, #2f8bff); padding: 10px 20px; border-radius: 20px; text-decoration: none; color: #061a2b; font-weight: bold; }
+      .hero { height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 8%; position: relative; }
+      .hero-left { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+      .hero-logo-img { width: 310px; height: auto; border-radius: 10px; }
+      .hero-left h1 { font-size: 70px; color: #00d4ff; margin: 0; }
+      .hero-left p { font-size: 22px; margin: 0; }
+      .hero-right { flex: 1; display: flex; justify-content: center; align-items: center; }
+      .device-img { max-width: 380px; width: 100%; height: auto; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); animation: float 4s ease-in-out infinite; }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+      .wave-divider { width: 100%; height: 120px; position: absolute; bottom: 0; left: 0; }
+      .wave-divider svg { width: 100%; height: 100%; }
+      .about { padding: 100px 5%; background: #eaf6ff; color: #061a2b; text-align: center; }
+      .about h2 { font-size: 48px; margin-bottom: 30px; color: #0b2e4e; }
+      .about p { font-size: 18px; line-height: 1.6; max-width: 800px; margin: 0 auto; }
+      .features { padding: 100px 5%; background: linear-gradient(135deg, #061a2b 0%, #0b2e4e 100%); text-align: center; }
+      .features h2 { font-size: 48px; margin-bottom: 50px; color: #00d4ff; text-shadow: 0 0 20px #00d4ff; }
+      .features-grid { display: flex; justify-content: center; gap: 50px; }
+      .feature-card { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+      .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 50px rgba(0, 212, 255, 0.6); }
+      .feature-icon { width: 80px; height: 80px; background: radial-gradient(circle, #00d4ff 0%, #4cf2e9 100%); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
+      .feature-card h3 { font-size: 24px; color: #eaf6ff; text-shadow: 0 0 10px #00d4ff; }
+      .stats { background: linear-gradient(135deg, #061a2b 0%, #0b2e4e 100%); padding: 100px 5%; text-align: center; }
+      .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+      .stat-item { display: flex; flex-direction: column; align-items: center; }
+      .stat-icon { width: 100px; height: 100px; background: linear-gradient(45deg, #00d4ff, #2f8bff); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; box-shadow: 0 0 25px rgba(0, 212, 255, 0.6); }
+      .stat-value { font-size: 36px; font-weight: bold; color: #4cf2e9; text-shadow: 0 0 15px #4cf2e9; }
+      .stat-label { font-size: 18px; color: #eaf6ff; }
+      footer { background: linear-gradient(135deg, #061a2b 0%, #0b2e4e 100%); padding: 30px; text-align: center; color: #eaf6ff; font-size: 14px; }
+      @media (max-width: 768px) { .hero { flex-direction: column; height: auto; padding: 100px 5% 50px; } .hero-left, .hero-right { flex: none; width: 100%; } .hero-right { position: static; margin-top: 50px; } .hero-left h1 { font-size: 48px; } .hero-buttons { flex-direction: column; gap: 20px; } .features-grid { flex-direction: column; align-items: center; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo" onclick="window.location.href='index.html'">
+        <img src="LOGO.png" height="90" alt="Logo"/> AquaMind
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="equipment.html">Equipment</a></li>
+          <li><a href="feedback.html">Feedbacks</a></li>
+          <li><a href="contact.html">Contact us</a></li>
+          <li><a href="logIn.html">Log in</a></li>
+          <li><a href="signUp.html">Sign up</a></li>
+        </ul>
+      </nav>
+      <a href="chatbot.HTML" class="support-btn">24/7 Support</a>
+    </header>
+    <section id="home" class="hero">
+      <div class="hero-left">
+        <img src="bef918ac-2868-41c8-93b3-257b004779c0.png" class="hero-logo-img" alt="" onerror="this.style.display='none'"/>
+        <h1>AquaMind</h1>
+        <p>Smart Water Monitoring & Control</p>
+      </div>
+      <div class="hero-right">
+        <img src="60ced608-d55a-4822-9ac9-a0ee6bdc56f1.png" class="device-img" alt="" onerror="this.style.display='none'"/>
+      </div>
+      <div class="wave-divider">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C300,120 600,0 900,60 L1200,60 L1200,120 L0,120 Z" fill="#EAF6FF"></path></svg>
+      </div>
+    </section>
+    <section id="about" class="about">
+      <h2>What’s Our Story</h2>
+      <p>AquaMind was founded in 2026 with a mission to revolutionize water management through intelligent IoT solutions. We build cutting-edge systems for homes and farms, ensuring efficient water usage, leak detection, and sustainable practices to conserve this precious resource.</p>
+    </section>
+    <section class="features">
+      <h2>What do you want to see?</h2>
+      <div class="features-grid">
+        <div class="feature-card" onclick="window.location.href='equipment.HTML'"><div class="feature-icon"></div><h3>Equipment</h3></div>
+        <div class="feature-card" onclick="window.location.href='chatbot.HTML'"><div class="feature-icon"></div><h3>Chat Bot</h3></div>
+      </div>
+    </section>
+    <section class="stats">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="#4CF2E9"/></svg></div>
+          <div class="stat-value">1M+</div>
+          <div class="stat-label">Water Saved</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="#4CF2E9"/></svg></div>
+          <div class="stat-value">5000+</div>
+          <div class="stat-label">Homes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="#4CF2E9"/></svg></div>
+          <div class="stat-value">200+</div>
+          <div class="stat-label">Farms</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="#4CF2E9"/></svg></div>
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Monitoring</div>
+        </div>
+      </div>
+    </section>
+    <footer><p>&copy; 2026 AquaMind. All rights reserved.</p></footer>
+  </body>
+</html>`;

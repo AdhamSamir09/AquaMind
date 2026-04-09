@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>aquamind - login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f3f4f6;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+      }
+
+      /* --- Dashboard Nav Styles --- */
+      .header-wrapper { 
+        background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); 
+        width: 100%; 
+        padding: 15px 40px; 
+        margin-bottom: 60px; /* Adjusted slightly to give room for the login card */
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+      }
+      .header-wrapper h1 { 
+        color: #ffffff; 
+        margin: 0; 
+        font-size: 24px; 
+        display: flex; 
+        align-items: center; 
+        gap: 12px; 
+        font-weight: 600;
+      }
+      .header-logo { height: 40px; width: auto; }
+      .nav-bar { display: flex; gap: 20px; align-items: center; }
+      .nav-item { 
+        text-decoration: none; 
+        color: rgba(255, 255, 255, 0.9); 
+        font-weight: 500; 
+        font-size: 0.95rem; 
+        padding: 8px 16px; 
+        border-radius: 50px; 
+        transition: all 0.3s ease; 
+        background: none; 
+        border: none; 
+        font-family: inherit; 
+        cursor: pointer; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px; 
+      }
+      .nav-item:hover, .nav-item.active { 
+        background-color: rgba(255, 255, 255, 0.2); 
+        color: white; 
+      }
+      
+      @media (max-width: 768px) { 
+        .header-wrapper { flex-direction: column; gap: 15px; padding: 20px; } 
+        .nav-bar { flex-wrap: wrap; justify-content: center; }
+      }
+      /* ---------------------------- */
+
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 40px;
+      }
+
+      .login-card {
+        background-color: white;
+        padding: 60px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 500px;
+        max-width: 90%;
+      }
+
+      .login-card h1 {
+        margin-bottom: 20px;
+        color: #2563eb;
+        text-transform: capitalize;
+      }
+
+      .login-card p {
+        margin-bottom: 20px;
+        color: #1a4840;
+      }
+      
+      .login-card input {
+        padding: 12px 20px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #4a7d47;
+      }
+
+      .login-card button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background-color: #2563eb; /* Updated to match theme blue */
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      
+      .login-card button:hover {
+        background-color: #1e3a8a;
+      }
+
+      .field {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .field label {
+        width: 90px;
+        flex: 1;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+        margin-right: 10px;
+      }
+      .field input {
+        flex: 2;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .remember-me {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .remember-me input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        margin-bottom: 0;
+      }
+
+      .forget-password {
+        color: #4498f7;
+        text-decoration: none;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        align-items: flex-start;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header-wrapper">
+      <h1 onclick="window.location.href='index.html'"><img src="white_icon.png" alt="" class="header-logo" onerror="this.style.display='none'"/> AquaMind</h1>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="about.html" class="nav-item">About Us</a>
+        <a href="contact.html" class="nav-item">Contact Us</a>
+        <a href="signUp.html" class="nav-item">Sign Up</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="login-card">
+        <h1>Welcome Back to AquaMind</h1>
+        <p>Log in to access your water dashboard</p>
+        <br />
+        <form id="login-form" action="dashboard.html" method="get">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="remember-me">
+            <input type="checkbox" id="remember-me" />
+            <label for="remember-me">Remember me</label>
+          </div>
+          <br />
+
+          <button type="submit">Log In</button><br /><br />
+        </form>
+        <a href="#" class="forget-password">Forgot password?</a><br /><br />
+        <p>
+          Don't have an account?
+          <a href="signUp.html" class="forget-password">Sign up</a>
+        </p>
+      </div>
+      
+      <script src="script.js"></script>
+    </main>
+  </body>
+</html>

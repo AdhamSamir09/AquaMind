@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AquaMind: Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+      * { box-sizing: border-box; }
+      body { font-family: "Poppins", sans-serif; background-color: #f3f4f6; margin: 0; padding: 0; color: #333; }
+      .header-wrapper { background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); width: 100%; padding: 15px 40px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); display: flex; justify-content: space-between; align-items: center; }
+      .header-wrapper h1 { color: #ffffff; margin: 0; font-size: 24px; display: flex; align-items: center; gap: 12px; }
+      .header-logo { height: 40px; width: auto; }
+      .nav-bar { display: flex; gap: 20px; align-items: center; }
+      .nav-item, .dropbtn { text-decoration: none; color: rgba(255, 255, 255, 0.9); font-weight: 500; font-size: 0.95rem; padding: 8px 16px; border-radius: 50px; transition: all 0.3s ease; background: none; border: none; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+      .nav-item:hover, .nav-item.active, .dropdown:hover .dropbtn { background-color: rgba(255, 255, 255, 0.2); color: white; }
+      .dropdown { position: relative; }
+      .dropdown-content { display: none; position: absolute; background-color: #ffffff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); z-index: 10; border-radius: 8px; top: 100%; left: 0; overflow: hidden; }
+      .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.9rem; }
+      .dropdown-content a:hover { background-color: #f3f4f6; }
+      .dropdown:hover .dropdown-content { display: block; }
+      .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 40px 20px; }
+      .card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; justify-content: space-between; }
+      .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; }
+      h3 { margin: 0; font-size: 1rem; font-weight: 600; color: #1f2937; display: flex; align-items: center; gap: 10px; }
+      .big-value { font-size: 2.8rem; font-weight: 700; color: #111827; line-height: 1; margin-bottom: 5px; }
+      .unit { font-size: 1.1rem; font-weight: 500; color: #6b7280; margin-left: 2px; }
+      .text-green { color: #10b981; } .text-blue { color: #2563eb; } .text-orange { color: #f59e0b; } .text-red { color: #ef4444; }
+      .card.hero { grid-column: 1 / -1; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: white; flex-direction: row; align-items: center; }
+      .hero-content h2 { margin: 0; color: white; font-size: 1.8rem; }
+      .hero-content p { margin: 5px 0 0 0; color: rgba(255, 255, 255, 0.8); }
+      .status-badge { background-color: rgba(255, 255, 255, 0.2); padding: 10px 20px; border-radius: 30px; font-weight: 600; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); }
+      .pulse-dot { width: 12px; height: 12px; background-color: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+      @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+      .progress-track { background: #f3f4f6; height: 12px; border-radius: 20px; overflow: hidden; margin-top: 10px; }
+      .progress-fill { background: linear-gradient(90deg, #2563eb, #3b82f6); height: 100%; transition: width 1s ease-out; }
+      .progress-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: #6b7280; }
+      .icon-box { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+      .icon-green { background-color: #ecfdf5; color: #10b981; }
+      .savings-text { color: #10b981; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; margin-top: 5px; }
+      .event-row { display: flex; align-items: center; gap: 15px; margin-top: 15px; padding: 10px; background: #f9fafb; border-radius: 10px; border-left: 4px solid #2563eb; }
+      .event-time { font-weight: 700; color: #111827; } .event-desc { color: #6b7280; font-size: 0.85rem; }
+      .table-responsive { overflow-x: auto; }
+      .history-table { width: 100%; border-collapse: collapse; }
+      .history-table th { text-align: left; color: #6b7280; font-size: 0.75rem; padding: 12px; border-bottom: 2px solid #f3f4f6; text-transform: uppercase; }
+      .history-table td { padding: 14px 12px; border-bottom: 1px solid #f9fafb; font-size: 0.9rem; }
+      .status-pill { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+      .status-pill.normal { background: #ecfdf5; color: #10b981; } .status-pill.scheduled { background: #eff6ff; color: #2563eb; } .status-pill.alert { background: #fef2f2; color: #ef4444; }
+      .chart-wrapper { width: 100%; height: 300px; margin-top: 20px; }
+      @media (max-width: 768px) { .header-wrapper { flex-direction: column; gap: 15px; padding: 20px; } .card.hero { flex-direction: column; text-align: center; gap: 20px; } .history-table { min-width: 600px; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script defer>
+      // Automatically inlined from Dashboard.js and data.json payload
+      fetch("data:application/json,%7B%22labels%22%3A%5B%22Mon%22%2C%22Tue%22%2C%22Wed%22%2C%22Thu%22%2C%22Fri%22%2C%22Sat%22%2C%22Sun%22%5D%2C%22values%22%3A%5B120%2C150%2C180%2C130%2C160%2C210%2C190%5D%7D")
+        .then(response => { if (!response.ok) { throw new Error("HTTP error " + response.status); } return response.json(); })
+        .then(data => {
+          const canvas = document.getElementById("myChart");
+          if (!canvas) throw new Error("Canvas #myChart not found");
+          const ctx = canvas.getContext("2d");
+          new Chart(ctx, {
+            type: "line",
+            data: { labels: data.labels, datasets: [{ label: "Water Consumption", data: data.values, borderWidth: 2, tension: 0.3, fill: false }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+          });
+        })
+        .catch(err => console.error("JSON load failed:", err));
+    </script>
+  </head>
+  <body>
+    <header class="header-wrapper">
+      <h1><img src="white_icon.png" alt="" class="header-logo" onerror="this.style.display='none'"/> AquaMind</h1>
+      <nav class="nav-bar">
+        <a href="index.html" class="nav-item ">Home</a>
+        <div class="dropdown">
+          <button class="dropbtn">System <i class="fa fa-caret-down"></i></button>
+          <div class="dropdown-content">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="control.html">Control</a>
+            <a href="alert.html">Alerts</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="dashboard-grid">
+      <div class="card hero">
+        <div class="hero-content"><h2>Valve is OPEN</h2><p>Normal flow detected. Aquamind active.</p></div>
+        <div class="status-badge"><div class="pulse-dot"></div> System Online</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3><i class="fas fa-chart-pie text-blue"></i> Weekly Usage</h3></div>
+        <div><div class="big-value">420<span class="unit">L</span></div><div class="progress-labels"><span>Current</span><span>Goal: 650L</span></div><div class="progress-track"><div class="progress-fill" style="width: 65%"></div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3><i class="fas fa-leaf text-green"></i> Est. Savings</h3><div class="icon-box icon-green"><i class="fas fa-dollar-sign"></i></div></div>
+        <div><div class="big-value">$14.50</div><div class="savings-text"><i class="fas fa-arrow-up"></i> 12% vs last month</div><p style="color: #9ca3af; font-size: 0.85rem; margin-top: 5px">Based on smart shut-offs</p></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3><i class="fas fa-calendar-alt text-orange"></i> Up Next</h3></div>
+        <div>
+          <div class="event-row"><div class="event-time">11:00 PM</div><div class="event-desc"><i class="fas fa-moon"></i> Auto-Close (Night Mode)</div></div>
+          <div class="event-row" style="opacity: 0.6; border-left-color: #ccc"><div class="event-time">06:00 AM</div><div class="event-desc"><i class="fas fa-sun"></i> Auto-Open</div></div>
+        </div>
+      </div>
+      <div class="card" style="grid-column: 1 / -1">
+        <div class="card-header"><h3><i class="fas fa-list text-blue"></i> Detailed Usage Log</h3></div>
+        <div class="table-responsive">
+          <table class="history-table">
+            <thead><tr><th>Time</th><th>Event Type</th><th>Volume</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Today, 07:30 AM</td><td>Morning Shower</td><td>42 L</td><td><span class="status-pill normal"><i class="fas fa-check"></i> Normal</span></td></tr>
+              <tr><td>Oct 24, 02:00 PM</td><td>Leak Detected</td><td class="text-red" style="font-weight: bold">2 L</td><td><span class="status-pill alert"><i class="fas fa-exclamation-triangle"></i> Auto-Shutoff</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" style="grid-column: 1 / -1">
+        <div class="card-header"><h3><i class="fas fa-chart-line text-blue"></i> Water Consumed</h3></div>
+        <div class="chart-wrapper"><canvas id="myChart"></canvas></div>
+      </div>
+    </main>
+  </body>
+</html>
