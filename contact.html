@@ -5,17 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us | Aqua Mind</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <style>
+      /* Base & Typography */
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: "Inter", "Segoe UI", sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.6; }
-      nav { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 15px 5%; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
-      .logo-wrapper { display: flex; align-items: center; text-decoration: none; gap: 12px; }
-      .nav-logo-img { height: 70px; width: auto; display: block; }
-      .logo-text { color: white; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.5px; }
-      .nav-links { display: flex; align-items: center; }
-      nav a.menu-item { text-decoration: none; color: rgba(255, 255, 255, 0.85); font-weight: 500; font-size: 0.95rem; transition: 0.3s; padding: 8px 16px; border-radius: 20px; }
-      nav a.menu-item:hover, nav a.menu-item.active { color: white; }
-      nav a.menu-item.active { background: rgba(255, 255, 255, 0.2); }
+      body { font-family: "Poppins", sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.6; }
+
+      /* Ported Navigation Styles from Dashboard */
+      .header-wrapper { background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); width: 100%; padding: 15px 40px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); display: flex; justify-content: space-between; align-items: center; }
+      .header-wrapper h1 { color: #ffffff; margin: 0; font-size: 24px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+      .header-logo { height: 40px; width: auto; }
+      .nav-bar { display: flex; gap: 20px; align-items: center; }
+      .nav-item, .dropbtn { text-decoration: none; color: rgba(255, 255, 255, 0.9); font-weight: 500; font-size: 0.95rem; padding: 8px 16px; border-radius: 50px; transition: all 0.3s ease; background: none; border: none; font-family: inherit; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+      .nav-item:hover, .nav-item.active, .dropdown:hover .dropbtn { background-color: rgba(255, 255, 255, 0.2); color: white; }
+      
+      /* Dropdown Menu logic */
+      .dropdown { position: relative; }
+      .dropdown-content { display: none; position: absolute; background-color: #ffffff; min-width: 160px; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); z-index: 10; border-radius: 8px; top: 100%; left: 0; overflow: hidden; }
+      .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.9rem; text-align: left; }
+      .dropdown-content a:hover { background-color: #f3f4f6; }
+      .dropdown:hover .dropdown-content { display: block; }
+
+      /* Contact Page Content Styles */
       .wrapper { max-width: 1200px; margin: 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; align-items: start; }
       .sidebar { background: #1e3a8a; color: white; padding: 50px; border-radius: 30px; box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15); }
       .sidebar h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 700; }
@@ -30,22 +41,30 @@
       .form-group input:focus, .form-group textarea:focus { border-color: #2563eb; background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05); }
       .submit-button { width: 100%; padding: 18px; background: #2563eb; color: white; border: none; border-radius: 15px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; }
       .submit-button:hover { background: #1e40af; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25); }
-      .sys-info { margin-top: 40px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: #93c5fd; }
-      @media (max-width: 992px) { .wrapper { grid-template-columns: 1fr; gap: 30px; margin: 30px auto; } .sidebar { padding: 30px; } }
+
+      /* Mobile responsiveness */
+      @media (max-width: 992px) { 
+        .header-wrapper { flex-direction: column; gap: 15px; padding: 20px; }
+        .wrapper { grid-template-columns: 1fr; gap: 30px; margin: 30px auto; } 
+        .sidebar { padding: 30px; } 
+      }
     </style>
   </head>
   <body>
-    <nav>
-      <a href="index.html" class="logo-wrapper">
-        <img src="white_icon.png" alt="Logo" class="nav-logo-img" onerror="this.style.display='none'" />
-        <span class="logo-text">AquaMind</span>
-      </a>
-      <div class="nav-links">
-        <a href="dashboard.html" class="menu-item">Dashboard</a>
-        <a href="control.html" class="menu-item">Control</a>
-        <a href="contact.html" class="menu-item active">Contact Us</a>
-      </div>
-    </nav>
+    <header class="header-wrapper">
+      <h1 onclick="window.location.href='index.html'">
+        <img src="white_icon.png" alt="" class="header-logo" onerror="this.style.display='none'"/> AquaMind
+      </h1>
+      <nav class="nav-bar">
+        <a href="equipment.html" class="nav-item">Equipment</a>
+        <a href="feedback.html" class="nav-item">Feedbacks</a>
+        </div>
+        <a href="contact.html" class="nav-item active">Contact</a> 
+        <a href="logIn.html" class="nav-item">Log In</a> 
+        <a href="signUp.html" class="nav-item">Sign Up</a> 
+      </nav>
+    </header>
+
     <div class="wrapper">
       <div class="sidebar">
         <h2>Get in Touch</h2>
@@ -55,8 +74,8 @@
           <a href="https://wa.me/201055978809" class="contact-item"><i class="fab fa-whatsapp"></i><span>+20 105 597 8809</span></a>
           <a href="https://instagram.com/Aquamind.analytics" class="contact-item"><i class="fab fa-instagram"></i><span>@Aquamind.analytics</span></a>
         </div>
-        <div class="sys-info"><strong>Access Key:</strong> @Aqumind!2.</div>
       </div>
+      
       <div class="form-container">
         <form id="aquaForm">
           <div class="form-group"><label>Full Name:</label><input type="text" id="userName" placeholder="Enter your name" required /></div>
@@ -66,6 +85,7 @@
         </form>
       </div>
     </div>
+
     <script>
       document.getElementById("aquaForm").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -76,7 +96,6 @@
         btn.innerHTML = "<span>Processing...</span>";
 
         setTimeout(() => {
-          // Replaced native alert per Canvas environmental standards
           const msg = document.createElement('div');
           msg.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#10b981;color:white;padding:15px 30px;border-radius:10px;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,0.15);font-weight:600;';
           msg.innerText = "Thank you, " + name + ". Your inquiry has been received.";
